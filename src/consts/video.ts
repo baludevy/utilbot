@@ -1,0 +1,1 @@
+export const TARGET_SIZE_MB = 18; 
