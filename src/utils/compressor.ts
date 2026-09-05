@@ -304,7 +304,7 @@ async function encodeSoftware(
 
     const scaleFilter =
         resolution.width !== info.width ||
-        resolution.height !== info.height
+            resolution.height !== info.height
             ? `scale=${resolution.width}:${resolution.height}`
             : null;
 
@@ -315,9 +315,9 @@ async function encodeSoftware(
             inputPath,
             ...(scaleFilter
                 ? [
-                      "-vf",
-                      scaleFilter,
-                  ]
+                    "-vf",
+                    scaleFilter,
+                ]
                 : []),
             "-c:v",
             "libx264",
@@ -343,9 +343,9 @@ async function encodeSoftware(
             inputPath,
             ...(scaleFilter
                 ? [
-                      "-vf",
-                      scaleFilter,
-                  ]
+                    "-vf",
+                    scaleFilter,
+                ]
                 : []),
             "-c:v",
             "libx264",
@@ -419,10 +419,9 @@ async function detectHardwareEncoder(): Promise<HardwareEncoder | null> {
             );
 
         console.log(
-            `[encoder] ${encoder}: ${
-                available
-                    ? "available"
-                    : "unavailable"
+            `[encoder] ${encoder}: ${available
+                ? "available"
+                : "unavailable"
             }`
         );
 
@@ -445,41 +444,41 @@ async function testHardwareEncoder(
     const args: string[] =
         encoder === "h264_vaapi"
             ? [
-                  "-hide_banner",
-                  "-v",
-                  "error",
-                  "-vaapi_device",
-                  "/dev/dri/renderD128",
-                  "-f",
-                  "lavfi",
-                  "-i",
-                  "color=black:size=640x360:duration=0.2",
-                  "-vf",
-                  "format=nv12,hwupload",
-                  "-frames:v",
-                  "3",
-                  "-c:v",
-                  encoder,
-                  "-f",
-                  "null",
-                  "-",
-              ]
+                "-hide_banner",
+                "-v",
+                "error",
+                "-vaapi_device",
+                "/dev/dri/renderD128",
+                "-f",
+                "lavfi",
+                "-i",
+                "color=black:size=640x360:duration=0.2",
+                "-vf",
+                "format=nv12,hwupload",
+                "-frames:v",
+                "3",
+                "-c:v",
+                encoder,
+                "-f",
+                "null",
+                "-",
+            ]
             : [
-                  "-hide_banner",
-                  "-v",
-                  "error",
-                  "-f",
-                  "lavfi",
-                  "-i",
-                  "color=black:size=640x360:duration=0.2",
-                  "-frames:v",
-                  "3",
-                  "-c:v",
-                  encoder,
-                  "-f",
-                  "null",
-                  "-",
-              ];
+                "-hide_banner",
+                "-v",
+                "error",
+                "-f",
+                "lavfi",
+                "-i",
+                "color=black:size=640x360:duration=0.2",
+                "-frames:v",
+                "3",
+                "-c:v",
+                encoder,
+                "-f",
+                "null",
+                "-",
+            ];
 
     try {
         const proc = Bun.spawn(
